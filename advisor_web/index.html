@@ -1,0 +1,566 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advisor AI — Biznes yordamchingiz</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 8%;
+            border-bottom: 1px solid #26304a;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #72a7ff;
+        }
+
+        .status {
+            color: #75e0b0;
+            font-size: 14px;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 70px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tag {
+            color: #91b8ff;
+            letter-spacing: 2px;
+            font-size: 12px;
+        }
+
+        h1 {
+            font-size: clamp(38px, 6vw, 64px);
+            margin: 20px 0;
+        }
+
+        h1 span {
+            color: #72a7ff;
+        }
+
+        .description {
+            color: #b4bfd5;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 620px;
+            margin: 0 auto 35px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 45px;
+            text-align: left;
+        }
+
+        .card {
+            background: #151d32;
+            border: 1px solid #2b3855;
+            padding: 28px;
+            border-radius: 18px;
+        }
+
+        .card h2 {
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #b4bfd5;
+            line-height: 1.6;
+        }
+
+        button {
+            background: #72a7ff;
+            color: #0b1020;
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        
+label {
+    display: block;
+    margin: 14px 0 7px;
+    color: #dce6fa;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #394866;
+    border-radius: 8px;
+    background: #0b1020;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+#result {
+    overflow-wrap: anywhere;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #394866;
+    border-radius: 8px;
+    background: #0b1020;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+ textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #394866;
+    border-radius: 8px;
+    background: #0b1020;
+    color: white;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+    margin-bottom: 12px;
+}
+
+#aiAnswer {
+    white-space: pre-wrap;
+}
+
+#askAiButton:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+.idea-item {
+    background: #0b1020;
+    border: 1px solid #394866;
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 12px;
+}
+
+.idea-item h3 {
+    color: #72a7ff;
+    margin-top: 0;
+    font-size: 17px;
+}
+
+.idea-item p {
+    overflow-wrap: anywhere;
+}
+
+.idea-note {
+    color: #b4bfd5;
+    font-size: 13px;
+}
+
+
+
+
+    /* mavjud footer kordlar*/
+
+        button:hover {
+            background: #a0c4ff;
+        }
+
+        footer {
+            text-align: center;
+            color: #8491aa;
+            padding: 30px 15px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 18px 5%;
+            }
+
+            main {
+                margin: 35px auto;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Advisor AI</div>
+        <div class="status">● Biznes yordamchingiz</div>
+    </header>
+
+    <main>
+        <div class="tag">SUN’IY INTELLEKT • BIZNES • MARKETING</div>
+
+        <h1>G‘oyangizni <span>biznesga</span> aylantiring.</h1>
+
+        <p class="description">
+            Biznes g‘oyalarini toping, foydangizni hisoblang
+            va marketing rejangizni tuzing — barchasi bir joyda.
+        </p>
+
+        <div class="cards">
+            <section class="card">
+    <h2>💡 Biznes g‘oyalari</h2>
+    <p>Budjetingizga mos biznes g‘oyalarini toping.</p>
+
+    <label for="businessBudget">Boshlang‘ich budjet (so‘m)</label>
+    <input
+        id="businessBudget"
+        type="number"
+        min="1"
+        value="5000000"
+        placeholder="Masalan, 5000000"
+    >
+
+    <label for="businessType">Biznes yo‘nalishi</label>
+    <select id="businessType">
+        <option value="all">Barcha yo‘nalishlar</option>
+        <option value="online">Onlayn biznes</option>
+        <option value="food">Oziq-ovqat va milliy taomlar</option>
+        <option value="services">Xizmat ko‘rsatish</option>
+        <option value="trade">Savdo</option>
+    </select>
+
+    <button onclick="findBusinessIdeas()">
+        G‘oyalarni topish
+    </button>
+
+    <div
+        id="businessIdeasResult"
+        aria-live="polite"
+        style="margin-top:20px; line-height:1.8;"
+    >
+        Sizga mos g‘oyalar shu yerda chiqadi.
+    </div>
+</section>
+           
+<section class="card">
+    <h2>🧮 Foyda kalkulyatori</h2>
+    <p>Sotuv va tannarx asosida foydangizni hisoblang.</p>
+
+    <label for="quantity">Mahsulot soni</label>
+    <input id="quantity" type="number" min="1" value="10">
+
+    <label for="price">Bitta mahsulot sotuv narxi (so‘m)</label>
+    <input id="price" type="number" min="0" value="15000">
+
+    <label for="cost">Bitta mahsulot tannarxi (so‘m)</label>
+    <input id="cost" type="number" min="0" value="9000">
+
+    <button onclick="calculateProfit()">Foydani hisoblash</button>
+
+    <div id="result" aria-live="polite" style="margin-top:20px; line-height:1.8;">
+        Natija shu yerda chiqadi.
+    </div>
+</section>
+
+        </div>
+        
+<section class="card" id="ai-chat">
+    <h2>🤖 Advisor AI bilan suhbat</h2>
+    <p>Biznesingiz haqida savol bering — AI javob beradi.</p>
+
+    <label for="aiQuestion">Savolingiz</label>
+    <textarea
+        id="aiQuestion"
+        rows="4"
+        maxlength="2000"
+        placeholder="Masalan: Menda 5 million so‘m bor. Qanday biznes boshlasam bo‘ladi?"
+    ></textarea>
+
+    <button id="askAiButton" onclick=" askAdvisorAI()">
+
+    
+        AI’dan so‘rash
+    </button>
+
+    <div
+        id="aiAnswer"
+        aria-live="polite"
+        style="margin-top:20px; line-height:1.8; overflow-wrap:anywhere;"
+    ></div>
+</section>
+
+    </main>
+
+    <footer>
+        Advisor AI © 2026 — Aqlli biznes qarorlari uchun
+    </footer>
+    
+<script>
+function calculateProfit() {
+    const quantity = Number(document.getElementById("quantity").value);
+    const price = Number(document.getElementById("price").value);
+    const cost = Number(document.getElementById("cost").value);
+    const result = document.getElementById("result");
+
+    if (
+        !Number.isFinite(quantity) ||
+        !Number.isFinite(price) ||
+        !Number.isFinite(cost) ||
+        !Number.isInteger(quantity) ||
+        quantity <= 0 ||
+        price < 0 ||
+        cost < 0
+    ) {
+        result.textContent = "Iltimos, qiymatlarni to‘g‘ri kiriting.";
+        return;
+    }
+
+    const revenue = quantity * price;
+    const expenses = quantity * cost;
+    const profit = revenue - expenses;
+
+    const money = number =>
+        number.toLocaleString("uz-UZ") + " so‘m";
+
+    result.innerHTML =
+        "<strong>📊 Hisob-kitob</strong><br>" +
+        "Tushum: " + money(revenue) + "<br>" +
+        "Tannarx jami: " + money(expenses) + "<br>" +
+        "<strong>Yalpi foyda: " + money(profit) + "</strong><br>" +
+        "<small>Soliq, ijara va boshqa xarajatlar kiritilmagan.</small>";
+}
+</script>
+</body>
+</html>
+<script>
+function findBusinessIdeas() {
+    const budget = Number(
+        document.getElementById("businessBudget").value
+    );
+
+    const type = document.getElementById("businessType").value;
+    const result = document.getElementById("businessIdeasResult");
+
+    if (!Number.isFinite(budget) || budget <= 0) {
+        result.textContent =
+            "Iltimos, budjetni to‘g‘ri kiriting.";
+        return;
+    }
+
+    const ideas  = [
+    {
+        title: "🎨 Dizayn xizmatlari",
+        type: "online",
+        min: 200000,
+        max: 1500000,
+        desc: "Post, reklama banneri va menyu dizaynlarini tayyorlash.",
+        note: "Kompyuter yoki telefon va dizayn ko‘nikmalari kerak."
+    },
+    {
+        title: "📱 SMM xizmatlari",
+        type: "online",
+        min: 300000,
+        max: 2000000,
+        desc: "Kichik bizneslarning ijtimoiy tarmoq sahifalarini yuritish.",
+        note: "Daromad mijozlar soni va xizmat sifatiga bog‘liq."
+    },
+    {
+        title: "🎁 Sovg‘a qutilari",
+        type: "trade",
+        min: 500000,
+        max: 3000000,
+        desc: "Buyurtma asosida sovg‘a qutilari va bezaklar tayyorlash.",
+        note: "Avval buyurtma olib, keyin material xarid qilish xavfni kamaytiradi."
+    },
+    {
+        title: "🧹 Tozalash xizmati",
+        type: "services",
+        min: 500000,
+        max: 3000000,
+        desc: "Uy va kichik ofislar uchun tozalash xizmati.",
+        note: "Asboblar, vositalar va transport xarajatlarini hisoblang."
+    },
+    {
+        title: "🥟 Buyurtma asosida pishiriqlar",
+        type: "food",
+        min: 1500000,
+        max: 5000000,
+        desc: "Somsa, pishiriq yoki boshqa taomlarni oldindan buyurtma bilan tayyorlash.",
+        note: "Oziq-ovqat xavfsizligi va jihozlar talablarini hisobga oling."
+    },
+    {
+        title: "🎧 Telefon aksessuarlari",
+        type: "trade",
+        min: 2000000,
+        max: 7000000,
+        desc: "Chexol, kabel, quloqchin va himoya oynalarini sotish.",
+        note: "Avval talabni tekshiring va sotilmay qolish xavfini hisoblang."
+    },
+    {
+        title: "🛍️ Kichik onlayn do‘kon",
+        type: "online",
+        min: 3000000,
+        max: 10000000,
+        desc: "Bitta mahsulot turiga ixtisoslashgan onlayn savdo boshlash.",
+        note: "Reklama, yetkazib berish va qaytarish xarajatlari ham bor."
+    },
+    {
+        title: "🍱 Tushlik yetkazib berish",
+        type: "food",
+        min: 5000000,
+        max: 15000000,
+        desc: "Ofislar va yaqin atrofdagi mijozlarga oldindan buyurtma asosida tushlik tayyorlash.",
+        note: "Oshxona, yetkazib berish va sanitariya talablarini tekshiring."
+    },
+    {
+        title: "🧴 Maishiy mahsulotlar do‘koni",
+        type: "trade",
+        min: 10000000,
+        max: 30000000,
+        desc: "Uy-ro‘zg‘or uchun kundalik kerakli mahsulotlarni sotish.",
+        note: "Ijara, tovar zaxirasi va aylanma mablag‘ uchun pul qoldiring."
+    },
+    {
+        title: "🖨️ Print va dizayn markazi",
+        type: "services",
+        min: 15000000,
+        max: 40000000,
+        desc: "Hujjat chiqarish, nusxa olish va oddiy dizayn xizmatlarini taklif qilish.",
+        note: "Printer, kompyuter, ijara va ta'mirlash xarajatlarini hisoblang."
+    },
+    {
+        title: "🍔 Kichik fast-food shoxobchasi",
+        type: "food",
+        min: 25000000,
+        max: 50000000,
+        desc: "Talabga qarab kichik joyda olib ketiladigan taomlarni sotish.",
+        note: "Jihozlar, ijara, sanitariya va ruxsat talablarini oldindan tekshiring."
+    },
+    {
+        title: "🛒 Kichik savdo nuqtasi",
+        type: "trade",
+        min: 30000000,
+        max: 50000000,
+        desc: "Joylashuvga mos kundalik mahsulotlar assortimentiga ega savdo nuqtasi.",
+        note: "Ijara, jihozlar, tovar zaxirasi va zaxira pulini rejalashtiring."
+    }
+];
+
+
+    
+    
+
+const suitable = ideas.filter(idea => {
+    const correctType =
+        type === "all" || idea.type === type;
+
+    return correctType &&
+        budget >= idea.min &&
+        budget <= idea.max;
+});
+
+
+
+
+    if (suitable.length === 0) {
+        result.textContent =
+            "Bu budjet uchun tanlangan yo‘nalishda mos g‘oya topilmadi. Budjetni yoki yo‘nalishni o‘zgartirib ko‘ring.";
+        return;
+    }
+
+    const money = amount =>
+        amount.toLocaleString("uz-UZ") + " so‘m";
+
+    result.innerHTML =
+        "<h3>Sizga mos biznes g‘oyalari</h3>" +
+        "<p class='idea-note'>Budjet: " +
+        money(budget) +
+        ". Xarajatlar taxminiy; haqiqiy narxlar hudud va sharoitga qarab farq qiladi.</p>" +
+        suitable.map(idea => `
+            <div class="idea-item">
+                <h3>${idea.title}</h3>
+                <p>${idea.desc}</p>
+                <p><strong>Taxminiy boshlang‘ich mablag‘:</strong><br>
+                ${money(idea.min)} – ${money(idea.max)}</p>
+                <p class="idea-note">${idea.note}</p>
+            </div>
+        `).join("");
+}
+</script>
+ 
+<script>
+ async function askAdvisorAI() { 
+    const qestion =console.log("AI funksiyasi ishga tushdi");
+    const question = document.getElementById("aiQuestion").value.trim();
+    const answerBox = document.getElementById("aiAnswer");
+    const button = document.getElementById("askAiButton");
+
+    if (!question) {
+        answerBox.textContent = "✍️ Avval savolingizni yozing.";
+        return;
+    }
+
+    let seconds = 0;
+    button.disabled = true;
+    
+    const timer = setInterval(() => {
+        seconds++;
+        answerBox.textContent =
+            `🤔 Advisor AI javob tayyorlamoqda... ⏱️ ${seconds} soniya`;
+    }, 1000);
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message: question })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.detail || "Serverda xatolik yuz berdi.");
+        }
+
+        answerBox.textContent = `✅ Javob (${seconds} soniya)\n\n${data.reply}`;
+    } catch (error) {
+        answerBox.textContent =
+            "❌ Ulanishda xatolik yuz berdi.\n" + error.message;
+    } finally {
+        clearInterval(timer);
+        button.disabled = false;
+    }
+ }
+
+
+   
+
+
+
+</script>
+
+</body>
+</html>
+
